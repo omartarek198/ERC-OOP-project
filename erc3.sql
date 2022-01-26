@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2022 at 05:25 PM
+-- Generation Time: Jan 26, 2022 at 10:09 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,22 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `addresses`
+--
+
+CREATE TABLE `addresses` (
+  `id` int(11) NOT NULL,
+  `country` varchar(222) NOT NULL,
+  `city` varchar(222) NOT NULL,
+  `area` varchar(222) NOT NULL,
+  `street` varchar(222) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `admins`
 --
 
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `userid` int(11) NOT NULL
+  `userid` int(11) NOT NULL,
+  `accesslevel` varchar(222) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `password`, `userid`) VALUES
-(1, 'jhkjlhl', '1', 1);
+INSERT INTO `admins` (`id`, `userid`, `accesslevel`) VALUES
+(1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -276,7 +289,10 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(222) NOT NULL,
   `usertypeid` int(11) NOT NULL,
-  `Dob` varchar(222) NOT NULL
+  `Dob` varchar(222) NOT NULL,
+  `email` varchar(222) DEFAULT NULL,
+  `password` varchar(222) DEFAULT NULL,
+  `phoneno` varchar(222) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -301,7 +317,7 @@ CREATE TABLE `volunteers` (
   `email` varchar(50) NOT NULL,
   `phonenumber` int(11) NOT NULL,
   `hours` int(10) NOT NULL,
-  `address` varchar(250) NOT NULL,
+  `addressid` int(11) NOT NULL,
   `compensation` int(10) NOT NULL,
   `missionid` int(11) NOT NULL,
   `userid` int(222) NOT NULL
@@ -311,12 +327,18 @@ CREATE TABLE `volunteers` (
 -- Dumping data for table `volunteers`
 --
 
-INSERT INTO `volunteers` (`id`, `email`, `phonenumber`, `hours`, `address`, `compensation`, `missionid`, `userid`) VALUES
-(1, 'alaaa@msa.edu', 128, 10, 'everywhere', 100, 1, 0);
+INSERT INTO `volunteers` (`id`, `email`, `phonenumber`, `hours`, `addressid`, `compensation`, `missionid`, `userid`) VALUES
+(1, 'alaaa@msa.edu', 128, 10, 0, 100, 1, 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `admins`
@@ -464,6 +486,12 @@ ALTER TABLE `volunteers`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `admins`
