@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2022 at 10:09 PM
+-- Generation Time: Jan 26, 2022 at 11:38 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `addresses` (
   `id` int(11) NOT NULL,
+  `addressid` int(11) DEFAULT NULL,
   `country` varchar(222) NOT NULL,
   `city` varchar(222) NOT NULL,
   `area` varchar(222) NOT NULL,
@@ -128,6 +129,17 @@ CREATE TABLE `donationdetails` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `financialrequest`
+--
+
+CREATE TABLE `financialrequest` (
+  `id` int(11) NOT NULL,
+  `income` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `items`
 --
 
@@ -145,6 +157,17 @@ CREATE TABLE `items` (
 
 CREATE TABLE `links` (
   `HTML_DATA` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mealrequest`
+--
+
+CREATE TABLE `mealrequest` (
+  `id` int(11) NOT NULL,
+  `familysize` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -260,10 +283,8 @@ CREATE TABLE `request` (
   `name` varchar(10) NOT NULL,
   `phonenum` varchar(11) NOT NULL,
   `RequestId` int(11) NOT NULL,
-  `RequestType` int(11) NOT NULL,
-  `NumrOfFamMembers` int(11) NOT NULL,
-  `Income` varchar(10) NOT NULL,
-  `Address` varchar(222) NOT NULL,
+  `RequestTypeid` int(11) NOT NULL,
+  `addressid` int(222) NOT NULL,
   `Description` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -385,9 +406,21 @@ ALTER TABLE `donationdetails`
   ADD KEY `itemid` (`itemid`);
 
 --
+-- Indexes for table `financialrequest`
+--
+ALTER TABLE `financialrequest`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mealrequest`
+--
+ALTER TABLE `mealrequest`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -530,9 +563,21 @@ ALTER TABLE `donationdetails`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `financialrequest`
+--
+ALTER TABLE `financialrequest`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `mealrequest`
+--
+ALTER TABLE `mealrequest`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
