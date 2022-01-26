@@ -1,6 +1,9 @@
 
 
 <?php
+include_once "../ValidationClass.php";
+
+$validate = new ValidationClass();
 $name = $phoneno  = $address  = $desc = $Fn  = "";
 $name_err = $phoneno_err  = $address_err  = $desc_err = "";
 
@@ -8,7 +11,14 @@ include_once 'AidFactory.php';
 $income = -1;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $input_name = trim($_POST["name"]);
+
+$name = trim($_POST["PhoneNumber"]);
+echo  $name;
+if (!$validate->ValidateDateIsInFuture($name))
+{
+    echo "PASSSSYYYYYTTT";
+}
+
     if (empty($input_name)) {
         $name_err = "Please enter a name.";
     } elseif (!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
