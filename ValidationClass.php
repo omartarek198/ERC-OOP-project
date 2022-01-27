@@ -24,7 +24,7 @@ class ValidationClass
         return true;
     }
     public function ValidateNumber($x){
-        if ($x < 0 && strlen((string)$x) == 11)
+        if ($x < 0 && strlen((string)$x) != 11)
         {
             return false;
         }
@@ -59,7 +59,15 @@ class ValidationClass
 
         return  true;
     }
-
+    
+    public function ValidateAge($x){
+        $tyear = date('Y');
+        $uyear = explode("-", $x);
+        if($uyear[0] > ($tyear - 12) || $uyear[0] < ($tyear - 100)){
+            return false
+        }
+        return true;
+    }
 
 
 }
