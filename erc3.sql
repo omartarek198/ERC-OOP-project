@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2022 at 10:47 AM
+-- Generation Time: Jan 27, 2022 at 12:34 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -72,7 +72,10 @@ CREATE TABLE `bloodstock` (
 --
 
 INSERT INTO `bloodstock` (`id`, `bloodtypeID`, `stock`) VALUES
-(1, 1, 55);
+(1, 1, 230),
+(2, 3, 20),
+(3, 2, 11),
+(4, 4, 13);
 
 -- --------------------------------------------------------
 
@@ -90,7 +93,10 @@ CREATE TABLE `bloodtype` (
 --
 
 INSERT INTO `bloodtype` (`id`, `bloodtype`) VALUES
-(1, 'A');
+(1, 'A'),
+(2, 'B'),
+(3, 'AB'),
+(4, 'O');
 
 -- --------------------------------------------------------
 
@@ -540,13 +546,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `bloodstock`
 --
 ALTER TABLE `bloodstock`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `bloodtype`
 --
 ALTER TABLE `bloodtype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cashstock`
