@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2022 at 11:38 PM
+-- Generation Time: Jan 27, 2022 at 04:58 AM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -101,30 +101,80 @@ INSERT INTO `cashstock` (`id`, `cashavailable`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `donation`
+-- Table structure for table `donationmethod`
 --
 
-CREATE TABLE `donation` (
-  `id` int(11) NOT NULL,
-  `donorid` int(11) NOT NULL,
-  `receiverid` int(11) NOT NULL,
-  `adminid` int(11) NOT NULL,
-  `DateTime` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `donationmethod` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `donationmethod`
+--
+
+INSERT INTO `donationmethod` (`Id`, `Name`) VALUES
+(1, 'VisaCard'),
+(2, 'DonateFromHome');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donationmethodoptions`
+--
+
+CREATE TABLE `donationmethodoptions` (
+  `Id` int(11) NOT NULL,
+  `DmethodID` int(11) NOT NULL,
+  `OptionID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `donationdetails`
+-- Table structure for table `donationoptionsvalue`
 --
 
-CREATE TABLE `donationdetails` (
+CREATE TABLE `donationoptionsvalue` (
   `id` int(11) NOT NULL,
-  `donationid` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `DonationDT` timestamp NOT NULL DEFAULT current_timestamp(),
-  `itemid` int(11) NOT NULL
+  `PMOpid` int(11) NOT NULL,
+  `value` text NOT NULL,
+  `Did` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `donationoptionsvalue`
+--
+
+INSERT INTO `donationoptionsvalue` (`id`, `PMOpid`, `value`, `Did`) VALUES
+(18, 1, '1234556789', 0),
+(19, 2, '2022-03', 0),
+(20, 3, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0),
+(21, 4, '1000', 0),
+(22, 5, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doptions`
+--
+
+CREATE TABLE `doptions` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(256) NOT NULL,
+  `Type` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `doptions`
+--
+
+INSERT INTO `doptions` (`Id`, `Name`, `Type`) VALUES
+(1, 'CardName', 'varchar'),
+(2, 'ExpieyData', 'date'),
+(3, 'sec code', 'int'),
+(4, 'amount', 'int'),
+(5, 'cardNumber', 'int');
 
 -- --------------------------------------------------------
 
@@ -223,54 +273,6 @@ INSERT INTO `missions` (`id`, `name`, `date`, `address`) VALUES
 CREATE TABLE `missionvol` (
   `id` int(11) NOT NULL,
   `volunid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `options`
---
-
-CREATE TABLE `options` (
-  `id` int(11) NOT NULL,
-  `Name` varchar(222) NOT NULL,
-  `Type` varchar(222) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `paymentmethod`
---
-
-CREATE TABLE `paymentmethod` (
-  `id` int(11) NOT NULL,
-  `Name` varchar(222) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `paymentmethodoptions`
---
-
-CREATE TABLE `paymentmethodoptions` (
-  `id` int(11) NOT NULL,
-  `Paymentid` int(11) NOT NULL,
-  `Optionid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `paymentmethodoptvalue`
---
-
-CREATE TABLE `paymentmethodoptvalue` (
-  `id` int(11) NOT NULL,
-  `pmopid` int(11) NOT NULL,
-  `value` text NOT NULL,
-  `donorid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -388,22 +390,37 @@ ALTER TABLE `cashstock`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `donation`
+-- Indexes for table `donationmethod`
 --
-ALTER TABLE `donation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`,`donorid`,`receiverid`,`adminid`,`DateTime`),
-  ADD KEY `receiverid` (`receiverid`),
-  ADD KEY `adminid` (`adminid`),
-  ADD KEY `donorid` (`donorid`);
+ALTER TABLE `donationmethod`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `Id` (`Id`);
 
 --
--- Indexes for table `donationdetails`
+-- Indexes for table `donationmethodoptions`
 --
-ALTER TABLE `donationdetails`
+ALTER TABLE `donationmethodoptions`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `Id` (`Id`,`DmethodID`,`OptionID`),
+  ADD KEY `donationmethodoptions_ibfk_1` (`DmethodID`),
+  ADD KEY `donationmethodoptions_ibfk_2` (`OptionID`);
+
+--
+-- Indexes for table `donationoptionsvalue`
+--
+ALTER TABLE `donationoptionsvalue`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `donationid` (`donationid`),
-  ADD KEY `itemid` (`itemid`);
+  ADD KEY `id` (`id`,`PMOpid`,`Did`) USING BTREE,
+  ADD KEY `id_2` (`id`,`PMOpid`,`Did`) USING BTREE,
+  ADD KEY `PMOpid` (`PMOpid`) USING BTREE,
+  ADD KEY `id_3` (`id`) USING BTREE;
+
+--
+-- Indexes for table `doptions`
+--
+ALTER TABLE `doptions`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `Id` (`Id`);
 
 --
 -- Indexes for table `financialrequest`
@@ -448,38 +465,6 @@ ALTER TABLE `missions`
 ALTER TABLE `missionvol`
   ADD PRIMARY KEY (`id`),
   ADD KEY `volunid` (`volunid`);
-
---
--- Indexes for table `options`
---
-ALTER TABLE `options`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `paymentmethod`
---
-ALTER TABLE `paymentmethod`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `paymentmethodoptions`
---
-ALTER TABLE `paymentmethodoptions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Paymentid_3` (`Paymentid`,`Optionid`),
-  ADD KEY `Paymentid` (`Paymentid`,`Optionid`),
-  ADD KEY `Paymentid_2` (`Paymentid`,`Optionid`),
-  ADD KEY `Optionid` (`Optionid`);
-
---
--- Indexes for table `paymentmethodoptvalue`
---
-ALTER TABLE `paymentmethodoptvalue`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pmopid` (`pmopid`,`donorid`),
-  ADD UNIQUE KEY `pmopid_2` (`pmopid`),
-  ADD UNIQUE KEY `pmopid_4` (`pmopid`,`donorid`),
-  ADD KEY `pmopid_3` (`pmopid`,`donorid`);
 
 --
 -- Indexes for table `request`
@@ -551,16 +536,28 @@ ALTER TABLE `cashstock`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `donation`
+-- AUTO_INCREMENT for table `donationmethod`
 --
-ALTER TABLE `donation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `donationmethod`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `donationdetails`
+-- AUTO_INCREMENT for table `donationmethodoptions`
 --
-ALTER TABLE `donationdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `donationmethodoptions`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `donationoptionsvalue`
+--
+ALTER TABLE `donationoptionsvalue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `doptions`
+--
+ALTER TABLE `doptions`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `financialrequest`
@@ -605,30 +602,6 @@ ALTER TABLE `missionvol`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `options`
---
-ALTER TABLE `options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `paymentmethod`
---
-ALTER TABLE `paymentmethod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `paymentmethodoptions`
---
-ALTER TABLE `paymentmethodoptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `paymentmethodoptvalue`
---
-ALTER TABLE `paymentmethodoptvalue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
@@ -663,12 +636,12 @@ ALTER TABLE `volunteers`
 --
 
 --
--- Constraints for table `donation`
+-- Constraints for table `donationmethodoptions`
 --
-ALTER TABLE `donation`
-  ADD CONSTRAINT `donation_ibfk_1` FOREIGN KEY (`receiverid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `donation_ibfk_2` FOREIGN KEY (`adminid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `donation_ibfk_3` FOREIGN KEY (`donorid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `donationmethodoptions`
+  ADD CONSTRAINT `donationmethodoptions_ibfk_1` FOREIGN KEY (`DmethodID`) REFERENCES `donationmethod` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `donationmethodoptions_ibfk_2` FOREIGN KEY (`OptionID`) REFERENCES `doptions` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `donationmethodoptions_ibfk_3` FOREIGN KEY (`Id`) REFERENCES `donationoptionsvalue` (`PMOpid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`
