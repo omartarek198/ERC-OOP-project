@@ -4,6 +4,7 @@ include_once "Onstate.php";
 include "systemstate.php";
 include_once "state.php";
 include_once "Offstate.php";
+include_once "Model.php";
 
 $context = new Context();
 $state = new Onstate($context);
@@ -11,13 +12,18 @@ $systemstate = new systemstate($context);
 $systemstate->turnsystemon();
 
 $systemstate->turnsystemoff();
+$creator = new CreateClass();
+
 
 if(isset($_POST['button1'])) {
     //online
     $systemstate->turnsystemon();
+    $creator->UpdateRecord(1);
 }
 if(isset($_POST['button2'])) {
+
     $systemstate->turnsystemoff();
+    $creator->UpdateRecord(0);
 }
 
 ?>

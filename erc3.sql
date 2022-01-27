@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2022 at 12:34 PM
+-- Generation Time: Jan 27, 2022 at 01:57 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -328,6 +328,24 @@ CREATE TABLE `requirelookup` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `systemstate`
+--
+
+CREATE TABLE `systemstate` (
+  `id` int(11) NOT NULL,
+  `state` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `systemstate`
+--
+
+INSERT INTO `systemstate` (`id`, `state`) VALUES
+(0, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -504,6 +522,12 @@ ALTER TABLE `requirelookup`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `systemstate`
+--
+ALTER TABLE `systemstate`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -637,6 +661,12 @@ ALTER TABLE `request`
 --
 ALTER TABLE `requirelookup`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `systemstate`
+--
+ALTER TABLE `systemstate`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
