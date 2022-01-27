@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2022 at 01:57 PM
+-- Generation Time: Jan 27, 2022 at 07:39 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -341,7 +341,7 @@ CREATE TABLE `systemstate` (
 --
 
 INSERT INTO `systemstate` (`id`, `state`) VALUES
-(0, 1);
+(0, 0);
 
 -- --------------------------------------------------------
 
@@ -386,13 +386,6 @@ CREATE TABLE `volunteers` (
   `missionid` int(11) NOT NULL,
   `userid` int(222) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `volunteers`
---
-
-INSERT INTO `volunteers` (`id`, `email`, `phonenumber`, `hours`, `addressid`, `compensation`, `missionid`, `userid`) VALUES
-(1, 'alaaa@msa.edu', 128, 10, 0, 100, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -672,7 +665,7 @@ ALTER TABLE `systemstate`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `usertype`
