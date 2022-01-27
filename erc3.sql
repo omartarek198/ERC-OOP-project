@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2022 at 04:58 AM
+-- Generation Time: Jan 27, 2022 at 10:47 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -67,6 +67,13 @@ CREATE TABLE `bloodstock` (
   `stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `bloodstock`
+--
+
+INSERT INTO `bloodstock` (`id`, `bloodtypeID`, `stock`) VALUES
+(1, 1, 55);
+
 -- --------------------------------------------------------
 
 --
@@ -75,9 +82,15 @@ CREATE TABLE `bloodstock` (
 
 CREATE TABLE `bloodtype` (
   `id` int(11) NOT NULL,
-  `bloodtype` int(11) NOT NULL,
-  `bloodtypeid` int(11) NOT NULL
+  `bloodtype` varchar(222) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bloodtype`
+--
+
+INSERT INTO `bloodtype` (`id`, `bloodtype`) VALUES
+(1, 'A');
 
 -- --------------------------------------------------------
 
@@ -115,7 +128,9 @@ CREATE TABLE `donationmethod` (
 
 INSERT INTO `donationmethod` (`Id`, `Name`) VALUES
 (1, 'VisaCard'),
-(2, 'DonateFromHome');
+(2, 'DonateFromHome'),
+(3, 'test'),
+(7, 'Paypal');
 
 -- --------------------------------------------------------
 
@@ -129,6 +144,18 @@ CREATE TABLE `donationmethodoptions` (
   `OptionID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `donationmethodoptions`
+--
+
+INSERT INTO `donationmethodoptions` (`Id`, `DmethodID`, `OptionID`) VALUES
+(11, 1, 1),
+(3, 1, 4),
+(16, 2, 3),
+(15, 3, 3),
+(9, 3, 5),
+(17, 7, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -141,17 +168,6 @@ CREATE TABLE `donationoptionsvalue` (
   `value` text NOT NULL,
   `Did` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `donationoptionsvalue`
---
-
-INSERT INTO `donationoptionsvalue` (`id`, `PMOpid`, `value`, `Did`) VALUES
-(18, 1, '1234556789', 0),
-(19, 2, '2022-03', 0),
-(20, 3, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0),
-(21, 4, '1000', 0),
-(22, 5, 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 0);
 
 -- --------------------------------------------------------
 
@@ -174,7 +190,8 @@ INSERT INTO `doptions` (`Id`, `Name`, `Type`) VALUES
 (2, 'ExpieyData', 'date'),
 (3, 'sec code', 'int'),
 (4, 'amount', 'int'),
-(5, 'cardNumber', 'int');
+(5, 'cardNumber', 'int'),
+(6, 'Full Name', 'varchar');
 
 -- --------------------------------------------------------
 
@@ -375,7 +392,8 @@ ALTER TABLE `admins`
 -- Indexes for table `bloodstock`
 --
 ALTER TABLE `bloodstock`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bloodtypeID` (`bloodtypeID`);
 
 --
 -- Indexes for table `bloodtype`
@@ -401,8 +419,8 @@ ALTER TABLE `donationmethod`
 --
 ALTER TABLE `donationmethodoptions`
   ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `unique_index` (`DmethodID`,`OptionID`),
   ADD KEY `Id` (`Id`,`DmethodID`,`OptionID`),
-  ADD KEY `donationmethodoptions_ibfk_1` (`DmethodID`),
   ADD KEY `donationmethodoptions_ibfk_2` (`OptionID`);
 
 --
@@ -413,7 +431,8 @@ ALTER TABLE `donationoptionsvalue`
   ADD KEY `id` (`id`,`PMOpid`,`Did`) USING BTREE,
   ADD KEY `id_2` (`id`,`PMOpid`,`Did`) USING BTREE,
   ADD KEY `PMOpid` (`PMOpid`) USING BTREE,
-  ADD KEY `id_3` (`id`) USING BTREE;
+  ADD KEY `id_3` (`id`) USING BTREE,
+  ADD KEY `PMOpid_2` (`PMOpid`);
 
 --
 -- Indexes for table `doptions`
@@ -521,13 +540,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `bloodstock`
 --
 ALTER TABLE `bloodstock`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `bloodtype`
 --
 ALTER TABLE `bloodtype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cashstock`
@@ -539,13 +558,13 @@ ALTER TABLE `cashstock`
 -- AUTO_INCREMENT for table `donationmethod`
 --
 ALTER TABLE `donationmethod`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `donationmethodoptions`
 --
 ALTER TABLE `donationmethodoptions`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `donationoptionsvalue`
@@ -557,7 +576,7 @@ ALTER TABLE `donationoptionsvalue`
 -- AUTO_INCREMENT for table `doptions`
 --
 ALTER TABLE `doptions`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `financialrequest`
@@ -636,12 +655,23 @@ ALTER TABLE `volunteers`
 --
 
 --
+-- Constraints for table `bloodstock`
+--
+ALTER TABLE `bloodstock`
+  ADD CONSTRAINT `bloodstock_ibfk_1` FOREIGN KEY (`bloodtypeID`) REFERENCES `bloodtype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `donationmethodoptions`
 --
 ALTER TABLE `donationmethodoptions`
   ADD CONSTRAINT `donationmethodoptions_ibfk_1` FOREIGN KEY (`DmethodID`) REFERENCES `donationmethod` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `donationmethodoptions_ibfk_2` FOREIGN KEY (`OptionID`) REFERENCES `doptions` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `donationmethodoptions_ibfk_3` FOREIGN KEY (`Id`) REFERENCES `donationoptionsvalue` (`PMOpid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `donationmethodoptions_ibfk_2` FOREIGN KEY (`OptionID`) REFERENCES `doptions` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `donationoptionsvalue`
+--
+ALTER TABLE `donationoptionsvalue`
+  ADD CONSTRAINT `donationoptionsvalue_ibfk_1` FOREIGN KEY (`PMOpid`) REFERENCES `donationmethodoptions` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`
