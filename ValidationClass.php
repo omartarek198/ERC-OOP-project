@@ -24,7 +24,7 @@ class ValidationClass
         return true;
     }
     public function ValidateNumber($x){
-        if (x < 0)
+        if ($x < 0 && strlen((string)$x) == 11)
         {
             return false;
         }
