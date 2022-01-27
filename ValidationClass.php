@@ -8,18 +8,15 @@ class ValidationClass
             return false;
         }
         else{
-            echo 'true';
             return true;
         }
-        //returns
     }
 
     public function ValidateEmail($x)
     {
 
         if (!filter_var($x, FILTER_VALIDATE_EMAIL)) {
-            echo 'Email not well formed';
-       return false;
+            return false;
         }
         return true;
     }
@@ -64,7 +61,7 @@ class ValidationClass
         $tyear = date('Y');
         $uyear = explode("-", $x);
         if($uyear[0] > ($tyear - 12) || $uyear[0] < ($tyear - 100)){
-            return false
+            return false;
         }
         return true;
     }
