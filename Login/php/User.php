@@ -3,11 +3,23 @@
 include_once 'databaseConfig.php';
 
 class User {
-
+    private $name;
+    private $usertypeid;
+    private $dob;
+    private $email;
     private $username;
     private $password;
+    private $phone;
     public $database;
-
+    public function __construct($name, $dob, $email, $username, $password, $pno) {
+        $this->name = $name;
+        $this->usertypeid = 2;
+        $this->dob = $dob;
+        $this->email = $email;
+        $this->username = $username;
+        $this->password = $password;
+        $this->phone = $pno;
+    }
  
 
     function getUsername() {
@@ -18,26 +30,22 @@ class User {
         return $this->password;
     }
     
-    function setUsername($username) {
-        $this->username = $username;
-    }
-
-    function setPassword($password) {
-        $this->password = $password;
+    function setUserTypeID($uti) {
+        $this->usertypeid = $uti;
     }
 
 
 
-    function register($user) {
+    function register() {
         $this->connectToDatabase();
-        $sql = "INSERT INTO admins (username, password)"
-                . " VALUES ('" . $user->getUsername() . "' , '" . sha1($user->getPassword())  . "')";
+        $sql = "INSERT INTO user (Name, usertypeid, Dob, email, username, password, phoneno)"
+                . " VALUES ('" . $this->name . "' , '" . $this->usertypeid  . "' , '" . $this->dob  . "' , '" . $this->email  . "' , '" . $this->username  . "' , '" . sha1($this->password)  . "' , '" . $this->phone  . "')";
         return $this->database->query($sql);
     }
 
     function login($user) {
         $this->connectToDatabase();
-        $sql = "select * from admins where username='" . $user->getUsername() . "' and password='" . $user->getPassword() . "'";
+        $sql = "select * from user where username='" . $user->getUsername() . "' and password='" . sha1($user->getPassword()) . "'";
         echo $sql;
         $res = $this->database->query($sql);
         if ($res->num_rows > 0) {
