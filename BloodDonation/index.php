@@ -4,8 +4,7 @@ $executing;
 
 include_once 'Database.php';
 include_once 'CreateClass.php';
-include_once 'EditinDB.php';
-include_once 'StateContext.php';
+
 ?>
 <head>
     <meta charset="UTF-8">
