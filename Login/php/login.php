@@ -27,7 +27,7 @@ if ($_POST) {
                       }
                       if ($row["state"] == 1)
                       {
-                          echo 'sys on';
+                          echo '<script>location.href="../../donation type view/donation_view.html";</script>';
                       }
             }
             else
