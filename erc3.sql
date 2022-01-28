@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2022 at 07:39 PM
+-- Generation Time: Jan 28, 2022 at 12:53 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,7 @@ CREATE TABLE `addresses` (
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `accesslevel` varchar(222) NOT NULL
+  `accesslevel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -53,7 +53,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `userid`, `accesslevel`) VALUES
-(1, 1, '');
+(1, 1, 0),
+(2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -351,13 +352,20 @@ INSERT INTO `systemstate` (`id`, `state`) VALUES
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `name` varchar(222) NOT NULL,
+  `Name` varchar(222) NOT NULL,
   `usertypeid` int(11) NOT NULL,
   `Dob` varchar(222) NOT NULL,
   `email` varchar(222) DEFAULT NULL,
   `password` varchar(222) DEFAULT NULL,
   `phoneno` varchar(222) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `Name`, `usertypeid`, `Dob`, `email`, `password`, `phoneno`) VALUES
+(1, 'sadasdasdasd', 2, 'asdasdasd', 'dasdasd', 'dasdasd', 'asdasdasd');
 
 -- --------------------------------------------------------
 
@@ -369,6 +377,14 @@ CREATE TABLE `usertype` (
   `id` int(11) NOT NULL,
   `name` varchar(222) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `usertype`
+--
+
+INSERT INTO `usertype` (`id`, `name`) VALUES
+(1, 'Admin'),
+(2, 'Member');
 
 -- --------------------------------------------------------
 
@@ -386,6 +402,13 @@ CREATE TABLE `volunteers` (
   `missionid` int(11) NOT NULL,
   `userid` int(222) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `volunteers`
+--
+
+INSERT INTO `volunteers` (`id`, `email`, `phonenumber`, `hours`, `addressid`, `compensation`, `missionid`, `userid`) VALUES
+(1, 'volunter1@gmail.com', 112999382, 12, 1, 12, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -526,7 +549,7 @@ ALTER TABLE `systemstate`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_2` (`id`),
-  ADD KEY `id` (`id`,`name`,`usertypeid`),
+  ADD KEY `id` (`id`,`usertypeid`),
   ADD KEY `usertypeid` (`usertypeid`);
 
 --
@@ -557,7 +580,7 @@ ALTER TABLE `addresses`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `bloodstock`
@@ -665,13 +688,13 @@ ALTER TABLE `systemstate`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `usertype`
 --
 ALTER TABLE `usertype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `volunteers`
@@ -682,6 +705,12 @@ ALTER TABLE `volunteers`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `admins`
+--
+ALTER TABLE `admins`
+  ADD CONSTRAINT `admins_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `bloodstock`
@@ -706,9 +735,13 @@ ALTER TABLE `donationoptionsvalue`
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `ooo` FOREIGN KEY (`id`) REFERENCES `admins` (`userid`),
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`usertypeid`) REFERENCES `usertype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`id`) REFERENCES `volunteers` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_ibfk_3` FOREIGN KEY (`usertypeid`) REFERENCES `usertype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `volunteers`
+--
+ALTER TABLE `volunteers`
+  ADD CONSTRAINT `volunteers_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
