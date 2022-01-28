@@ -26,21 +26,24 @@
                         <div class="page-header">
                             <h2>Create Record</h2>
                         </div>
-                        <p>Please fill this form and submit to add Volunteer record to the database.</p>
+                        <p>Grant admin privileges </p>
                         <form action="../Controller/CreateController.php" method="post">
                             <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                                <label>Name</label>
+                                <label>username</label>
                                 <input type="text" name="name" class="form-control" value="">
                                 <span class="help-block"></span>
                             </div>
-                              <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                                <label>password</label>
-                                <input type="text" name="pwd" class="form-control" value="">
-                                <span class="help-block"></span>
+
                             </div>
                               <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                                <label>acess level</label>
-                                <input type="text" name="alevel" class="form-control" value="">
+                                <label>access level</label>
+
+                                  <select id="cmbMake" name="alevel"     onchange="document.getElementById('selected_text').value=this.options[this.selectedIndex].text">
+
+                                      <option value="1">Admin</option>
+                                      <option value="2">SuperAdmin</option>
+
+                                  </select>
                                 <span class="help-block"></span>
                             </div>
                             

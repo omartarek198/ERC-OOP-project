@@ -14,7 +14,7 @@ class ReadClass {
 
     public function readAll() {
 
-        $sql = "SELECT * FROM admin";
+        $sql = "SELECT * FROM admins";
         if ($result = mysqli_query($this->link, $sql)) {
             return $result;
         } else {

@@ -1,0 +1,13 @@
+{
+    "name": "vendor/gen-report",
+    "description": "Description of project genReport.",
+    "authors": [
+        {
+            "name": "Omar",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.21"
+    }
+}

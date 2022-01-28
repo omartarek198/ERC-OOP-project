@@ -1,9 +1,9 @@
 <?php
 
-include_once 'Database.php';   
+        include_once 'Database.php';   
         include_once 'CreateClass.php';   
-        include_once 'EditinDB.php';   
-        include_once 'StateContext.php';  
+         
+        
 
 class CreateClass {
 
@@ -35,37 +35,96 @@ class CreateClass {
         mysqli_close($link);
         return false;
     }
-    public function readAll() {
-
-        // Attempt select query execution
-        $sql = "SELECT * FROM bloodstock";
-        if ($result = mysqli_query($this->link, $sql)) {
-            return $result; 
-        } else {
-            echo "ERROR: Could not able to execute $sql. " . mysqli_error($this->link);
-            return false;
-        }
-
-        // Close connection
-        mysqli_close($this->link);
-        return false;
-    }
     public function readd()
     {
-        $sql = "SELECT stock FROM bloodstock where bloodtypeID=1";
+         
+        $sql = "SELECT * FROM bloodstock";
+        $sql2 = $sql;
         if ($result = mysqli_query($this->link, $sql)) {
-            return $result; 
+            
+            return $result;
         } else {
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($this->link);
             return false;
         }
+        
 
         // Close connection
         mysqli_close($this->link);
         return false;
     }
+    public function read1()
+    {
+         
+        $sql = "SELECT stock FROM bloodstock where bloodtypeID=1;";
+        $sql2 = $sql;
+        if ($result = mysqli_query($this->link, $sql)) {
+            
+            return $result;
+        } else {
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($this->link);
+            return false;
+        }
+        
 
+        // Close connection
+        mysqli_close($this->link);
+        return false;
+    }
+    public function read2()
+    {
+         
+        $sql = "SELECT stock FROM bloodstock where bloodtypeID=2;";
+        $sql2 = $sql;
+        if ($result = mysqli_query($this->link, $sql)) {
+            
+            return $result;
+        } else {
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($this->link);
+            return false;
+        }
+        
 
+        // Close connection
+        mysqli_close($this->link);
+        return false;
+    }
+    public function read3()
+    {
+         
+        $sql = "SELECT stock FROM bloodstock where bloodtypeID=3;";
+        $sql2 = $sql;
+        if ($result = mysqli_query($this->link, $sql)) {
+            
+            return $result;
+        } else {
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($this->link);
+            return false;
+        }
+        
+
+        // Close connection
+        mysqli_close($this->link);
+        return false;
+    }
+    public function read4()
+    {
+         
+        $sql = "SELECT stock FROM bloodstock where bloodtypeID=4;";
+        $sql2 = $sql;
+        if ($result = mysqli_query($this->link, $sql)) {
+            
+            return $result;
+        } else {
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($this->link);
+            return false;
+        }
+        
+
+        // Close connection
+        mysqli_close($this->link);
+        return false;
+    }
 }
 
 ?>
