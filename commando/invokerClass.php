@@ -8,7 +8,7 @@ class invoker{
     public function grant(){
         $this->com->execute();
     }
-    public function undo(){
+    public function revoke(){
         $this->com->undo();
     }
 }

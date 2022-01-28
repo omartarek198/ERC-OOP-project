@@ -1,14 +1,15 @@
 <?php
+include_once 'adminPermissions.php';
 class revokeAccess implements command{
-    private user $uid;
-    public function __construct($userid){
-        $this->uid = $userid;
+    private adminPermissions $mAdmin;
+    public function __construct($ma){
+        $this->mAdmin = $ma;
     }
     public function execute(){
-        //HERE IS WHERE YOU ACCESS DB TO SET ACCESS PERMISSION TO FALSE
+        $this->mAdmin->revokeAccess();
     }
 
     public function undo(){
-        //UNDO REVOKING ACCESS
+        $this->mAdmin->grantAccess();
     }
 }

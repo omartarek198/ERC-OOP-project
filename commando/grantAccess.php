@@ -1,14 +1,15 @@
 <?php
+include_once 'adminPermissions.php';
 class grantAccess implements command{
-    private user $uid;
-    public function __construct($userid){
-        $this->uid = $userid;
+    private adminPermissions $mAdmin;
+    public function __construct($ma){
+        $this->mAdmin = $ma;
     }
     public function execute(){
-        //HERE IS WHERE YOU ACCESS THE DB TO SET PERMSSIONS TO TRUE
+        $this->mAdmin->grantAccess();
     }
 
     public function undo(){
-        //UNDO GRANTING ACCESS
+        $this->mAdmin->revokeAccess();
     }
 }
