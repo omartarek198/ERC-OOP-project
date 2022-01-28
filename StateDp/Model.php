@@ -13,7 +13,7 @@ class CreateClass{
     public function UpdateRecord($x)
     {
 
-        $sql = "UPDATE systemstate SET state =$x WHERE id=0";
+            $sql = "UPDATE systemstate SET state =$x WHERE id=0";
 
 
         if (mysqli_query($this->link, $sql)) {

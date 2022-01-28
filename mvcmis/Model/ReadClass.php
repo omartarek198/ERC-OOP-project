@@ -14,7 +14,7 @@ class ReadClass {
 
     public function readAll() {
 
-        $sql = "SELECT * FROM admins";
+        $sql = "SELECT * FROM missions";
         if ($result = mysqli_query($this->link, $sql)) {
             return $result;
         } else {
@@ -27,7 +27,7 @@ class ReadClass {
     }
 
     public function readOneRecord($id) {
-        $sql = "SELECT * FROM volunteer WHERE id = ?";
+        $sql = "SELECT * FROM missions WHERE id = ?";
 
         if ($stmt = mysqli_prepare($this->link, $sql)) {
             mysqli_stmt_bind_param($stmt, "i", $param_id);

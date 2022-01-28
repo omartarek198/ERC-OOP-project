@@ -1,3 +1,6 @@
+
+
+<h1>test</h1>
 <?php
 
 include_once 'CreateUser.php';
@@ -30,9 +33,11 @@ if ($_POST)
         echo "<script type='text/javascript'>alert('PLEASE ENTER A HUMAN NAME');</script>";
         echo '<script>location.href="../register.html";</script>';
     }else if (!$creator->IsUNtaken($username)){
+
         $user = new User($_POST["registerName"], $_POST["registerDate"], $_POST["registerEmail"], $_POST["registerUsername"], $_POST["registerPassword"], $_POST["registerPhoneNo"]);
+
         $user->register();
-        echo '<script>location.href="../choose.html";</script>';
+     //   echo '<script>location.href="../choose.html";</script>';
     }
     else{
         echo "<script type='text/javascript'>alert('CHOOSE ANOTHER USERNAME PLEASE THIS ONE IS TAKEN');</script>";

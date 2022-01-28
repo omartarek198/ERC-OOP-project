@@ -12,7 +12,7 @@
         }
         .wrapper{
             width: 650px;
-            margin: 0 auto;
+            margin:    0 auto;
         }
         .page-header h2{
             margin-top: 0;
@@ -34,8 +34,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="pull-left">Admins' Details</h2>
-                        <a href="View/create.php" class="btn btn-danger pull-right">Add New Admin</a>
+                        <h2 class="pull-left">Mission Details</h2>
+                        <a href="View/create.php" class="btn btn-danger pull-right">Add New Mission</a>
                     </div>
                     <?php
                     require_once 'Controller/ReadAllController.php';

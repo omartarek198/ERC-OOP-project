@@ -26,31 +26,23 @@
                         <div class="page-header">
                             <h2>Create Record</h2>
                         </div>
-                        <p>Grant admin privileges </p>
+                        <p>Please fill this form and submit to add Volunteer record to the database.</p>
                         <form action="../Controller/CreateController.php" method="post">
                             <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                                <label>username</label>
+                                <label>Name</label>
                                 <input type="text" name="name" class="form-control" value="">
                                 <span class="help-block"></span>
                             </div>
-
-                            </div>
-                              <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                                <label>access level</label>
-
-                                  <select id="cmbMake" name="alevel"     onchange="document.getElementById('selected_text').value=this.options[this.selectedIndex].text">
-
-                                      <option value="1">Admin</option>
-                                      <option value="2">SuperAdmin</option>
-
-                                  </select>
+                            <div class="form-group <?php echo (!empty($date_err)) ? 'has-error' : ''; ?>">
+                                <label>Date</label>
+                                <input type="text" name="date" class="form-control" value="">
                                 <span class="help-block"></span>
                             </div>
-                            
-                        
-                       
-                   
-                       
+                            <div class="form-group <?php echo (!empty($address_err)) ? 'has-error' : ''; ?>">
+                                <label>Address</label>
+                                <textarea name="address" class="form-control"></textarea>
+                                <span class="help-block"></span>
+                            </div>
                             <input type="submit" class="btn btn-danger" value="Submit">
                             <a href="../index.php" class="btn btn-default">Cancel</a>
                         </form>

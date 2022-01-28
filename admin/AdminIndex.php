@@ -56,9 +56,9 @@
           </a>
         </li>
         <li>
-          <a href="../Phase1/Login/register.html">
+          <a href="team/index.php">
             <i class='bx bx-user' ></i>
-            <span class="links_name">Register Admins</span>
+            <span class="links_name">Regsister Admins</span>
           </a>
         </li>
         <li>
