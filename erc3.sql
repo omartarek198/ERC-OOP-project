@@ -29,11 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `addresses` (
   `id` int(11) NOT NULL,
-  `addressid` int(11) DEFAULT NULL,
-  `country` varchar(222) NOT NULL,
-  `city` varchar(222) NOT NULL,
-  `area` varchar(222) NOT NULL,
-  `street` varchar(222) NOT NULL
+  `addressname` varchar(255) DEFAULT NULL,
+  `pid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -418,7 +415,9 @@ INSERT INTO `volunteers` (`id`, `email`, `phonenumber`, `hours`, `addressid`, `c
 -- Indexes for table `addresses`
 --
 ALTER TABLE `addresses`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`,`pid`),
+  ADD KEY `pid` (`pid`);
 
 --
 -- Indexes for table `admins`
@@ -706,6 +705,11 @@ ALTER TABLE `volunteers`
 -- Constraints for dumped tables
 --
 
+--
+-- Constraints for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 --
 -- Constraints for table `admins`
 --
