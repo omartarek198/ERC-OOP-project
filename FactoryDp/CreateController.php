@@ -6,7 +6,13 @@ include_once "../ValidationClass.php";
 $validate = new ValidationClass();
 $name = $phoneno  = $address  = $desc = $Fn  = "";
 $name_err = $phoneno_err  = $address_err  = $desc_err = "";
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name =
+    public function ValidationClass()
+    {
+        if (!)
+}
+}
 include_once 'AidFactory.php';
 $income = -1;
 
@@ -16,7 +22,7 @@ $name = trim($_POST["PhoneNumber"]);
 echo  $name;
 if (!$validate->ValidateDateIsInFuture($name))
 {
-    echo "PASSSSYYYYYTTT";
+
 }
 
     if (empty($input_name)) {
@@ -80,9 +86,9 @@ if (!$validate->ValidateDateIsInFuture($name))
         $creator = new CreateClass();
         if ($TypeOfAid == 1)
         {
-            $creator->insertMoneyRecord($name, $phoneno, $income,$address,$desc,$ReqType);
-       
-                    if ($creator->AddValuesToDatebase()) 
+            $creator->insertMoneyRecord($name, $phoneno, $income,$desc,$address,$ReqType);
+
+                    if ($creator->AddValuesToDatebase($name,$phoneno,$desc,$income,$Fn,1))
                             {
             header("location: ../index.php");
         } else {
@@ -91,8 +97,8 @@ if (!$validate->ValidateDateIsInFuture($name))
         }
         if ($TypeOfAid == 2)
         {
-           
-            $creator->insertFoodRecord($name, $phoneno, $Fn,$address,$desc,$ReqType);
+
+            if ($creator->AddValuesToDatebase($name,$phoneno,$desc,$income,$Fn,2));
 
         } else {
             echo "Something went wrong. lease try again later.";

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'Database.php';
 if ($_POST) {
     if (isset($_POST['login']) && $_POST['login'] == "Login") {
@@ -17,13 +18,15 @@ if ($_POST) {
             $row = mysqli_fetch_assoc($res);
             if ($row["usertypeid"] == 2)
             {
+                $_SESSION["userID"] = $row["id"];
+
                     echo 'user';
                     $sql = "select * from systemstate where id = 0";
                       $res = mysqli_query($link, $sql);
                       $row = mysqli_fetch_assoc($res);
                       if ($row["state"] == 0)
                       {
-                          echo  'sys off';
+                          echo  'system offline';
                       }
                       if ($row["state"] == 1)
                       {

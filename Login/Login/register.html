@@ -1,0 +1,33 @@
+<html>
+<head>
+        <title>Register</title>
+        <link rel="stylesheet" type="text/css" href="home.css">
+        
+    </head>
+    <body>
+        <div class="wrapper col">
+<div class="col-md-6">
+    <h1 id="formHeader"> Register form  </h1>
+    <hr>
+    <form method="post" action="PHP/register.php"  >
+        <label >Name</label>
+        <input type="text" name="registerName" id="registerName" required>
+        <label>Date Of Birth</label>
+        <input type="date" name="registerDate" id="registerDate" required>
+        <label >Email</label>
+        <input type="text" name="registerEmail" id="registerEmail" required>
+        <label >Username</label>
+        <input type="text" name="registerUsername" id="registerUsername" required>
+        <label >Password</label>
+        <input type="password" name="registerPassword" id="registerPassword" required>
+        <label >Confirm Password</label>
+        <input type="password" name="registerConfirmPassword" id="registerConfrimPassword" required>
+        <label >Phone Number</label>
+        <input type="text" name="registerPhoneNo" id="registerPhoneNo" required>
+
+        <button type="submit" name="register" value="Register"> Register </button>
+    </form>
+</div>
+</div>
+</body>
+</html>

@@ -20,21 +20,27 @@
           </a>
         </li>
         <li>
-            <a href="../Phase1/mvcmis/index.php">
+            <a href="../mvcmis/index.php">
             <i class='bx bx-box' ></i>
             <span class="links_name">Manage Missions</span>
           </a>
         </li>
+<li>
+            <a href="../StateDp/index.php">
+            <i class='bx bx-box' ></i>
+            <span class="links_name">System State</span>
+          </a>
+        </li>
         <li>
-            <a href="../Phase1/vcm/index.php">
+            <a href="../vcm/index.php">
             <i class='bx bx-user' ></i>
             <span class="links_name">Manage volunteers</span>
           </a>
         </li>
         <li>
-          <a href="../report/index.php">
+          <a href="../genReport/genReportView.php">
             <i class='bx bx-pie-chart-alt-2' ></i>
-            <span class="links_name">Report</span>
+            <span class="links_name">Repoort</span>
           </a>
         </li>
         <li>
@@ -44,9 +50,10 @@
           </a>
         </li>
         <li>
+	
           <a href="../add message/index.php">
             <i class='bx bx-message' ></i>
-            <span class="links_name">Add Message</span>
+            <span class="links_name">Create Message </span>
           </a>
         </li>
         <li>
@@ -61,20 +68,21 @@
             <span class="links_name">Regsister Admins</span>
           </a>
         </li>
+     <li>
+          <a href="../commando/commandView.php">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Revoke/Grant access</span>
+          </a>
+        </li>
         <li>
           <a href="../imgproxy/index.php">
             <i class='bx bx-image' ></i>
             <span class="links_name">Retreive Image</span>
           </a>
         </li>
-        <li>
-          <a href="../don/index.php">
-            <i class='bx bx-heart' ></i>
-            <span class="links_name">Donate</span>
-          </a>
-        </li>
+
         <li class="log_out">
-          <a href="../Phase1/Login/index.html">
+          <a href="../Login/index.html">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>

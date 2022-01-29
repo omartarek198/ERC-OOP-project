@@ -3,7 +3,8 @@
 $dbHost     = "localhost";  
 $dbUsername = "root";  
 $dbPassword = "";  
-$dbName     = "erc3";  
+$dbName     = "erc3";
+$db = " ";
   
 // Create database connection  
 $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);  

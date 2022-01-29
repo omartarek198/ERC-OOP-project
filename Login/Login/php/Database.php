@@ -1,13 +1,17 @@
 <?php
+
 class Database {
 
     private $server = "localhost";
     private $username = "root";
     private $password = "";
-    private $dbname = "oop";
+    private $dbname = "erc3";
+    public $conn = "";
 
     public function connectToDB() {
         $link = mysqli_connect($this->server, $this->username, $this->password, $this->dbname);
+
+
         if ($link)
             return $link;
         else {

@@ -44,7 +44,7 @@ class FoodAid implements iAid
                             </div>
                             <div class="form-group <?php echo (!empty($phoneno_err)) ? 'has-error' : ''; ?>">
                                 <label>Phone number</label>
-                                <input type= "date" name="PhoneNumber" class="form-control" value="">
+                                <input type= "number" name="PhoneNumber" class="form-control" value="">
                                 <span class="help-block"></span>
                             </div>
                             

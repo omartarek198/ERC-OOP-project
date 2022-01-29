@@ -1,18 +1,18 @@
 <?php
-$name = $email = $phonenumber = $hours = $address = $compensation = $missionid = "";
-$name_err = $email_err = $phonenumber_err = $hours_err = $address_err = $compensation_err = $missionid_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $input_name = trim($_POST["name"]);
-    if (empty($input_name)) {
-        $name_err = "Please enter a name.";
-    } elseif (!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $name_err = "Please enter a valid name.";
-    } else {
-        $name = $input_name;
-    }
 
-    $input_email = trim($_POST["email"]);
+    $name = $_POST["name"];
+    $dob = $_POST["date"];
+    $email = $_POST["email"];
+    $username = $_POST["username"];
+    $pwd = $_POST["password"];
+    $phonenumber = $_POST["phonenumber"];
+    $hours = $_POST["hours"];
+
+    $compensation = $_POST["comp"];
+    $missionid = $_POST["misID"];
+    /*$input_email = trim($_POST["email"]);
     if (empty($input_email)) {
         $email_err = "Please enter an email.";
     } else {
@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $input_phonenumber = trim($_POST["phonenumber"]);
+
     if (empty($input_phonenumber)) {
         $phonenumber_err = "Please enter the Phone Number.";
     } elseif (!ctype_digit($input_phonenumber)) {
@@ -59,15 +60,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $missionid = $input_missionid;
     }
+    */
+    include_once '../Model/CreateClass.php';
+
+    $creator = new CreateClass();
+    if ($creator->insertRecord($name, $email, $phonenumber, $hours, $compensation, $missionid)) {
+        header("location: ../index.php");
+    }
 
     if (empty($name_err) && empty($email_err) && empty($phonenumber_err) && empty($hours_err) && empty($address_err) && empty($compensation_err) && empty($missionid_err)) {
         include_once '../Model/CreateClass.php';
-        $creator = new CreateClass();
-        if ($creator->insertRecord($name, $email, $phonenumber, $hours, $address, $compensation, $missionid)) {
-            header("location: ../index.php");
-        } else {
-            echo "Something went wrong. Please try again later.";
-        }
+
+
     }
 
 }
