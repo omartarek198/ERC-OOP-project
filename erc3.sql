@@ -33,6 +33,31 @@ CREATE TABLE `addresses` (
   `pid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `addresses`
+--
+
+INSERT INTO `addresses` (`id`, `addressname`, `pid`) VALUES
+(1, 'Africa', NULL),
+(2, 'Egypt', 1),
+(3, 'Cairo', 2),
+(4, 'Nasr City', 3),
+(5, 'Maadi', 3),
+(6, 'Makram Obaid', 4),
+(7, 'Abbass Aqaad', 4),
+(8, 'Alexandria', 2),
+(9, 'Giza', 2),
+(10, 'Sheikh Zayed', 9),
+(11, '6th Of October', 9),
+(12, 'Opera City', 10),
+(13, 'Rabwa', 10),
+(14, 'Tiba Gardens', 11),
+(15, 'Bashayer', 11),
+(18, 'Qaluybia', 2),
+(19, '21', 8),
+(22, 'Abo Qayr', 8),
+(23, 'Haram', 9);
+
 -- --------------------------------------------------------
 
 --
@@ -326,6 +351,30 @@ CREATE TABLE `requirelookup` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sql_inject`
+--
+
+CREATE TABLE `sql_inject` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `sqlinj` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sql_inject`
+--
+
+INSERT INTO `sql_inject` (`id`, `name`, `sqlinj`) VALUES
+(1, 'get user with id', 'SELECT * FROM user WHERE id='),
+(2, 'get all users', 'SELECT * FROM user'),
+(3, 'grant one user', 'UPDATE user set accessMode=1 where id=?'),
+(4, 'revoke one user', 'UPDATE user set accessMode=2 where id=?'),
+(5, 'grant all', 'update user set accessMode=1 where (id > 1)'),
+(6, 'revoke all', 'update user set accessMode=2 where (id > 1)');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `systemstate`
 --
 
@@ -350,19 +399,22 @@ INSERT INTO `systemstate` (`id`, `state`) VALUES
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `Name` varchar(222) NOT NULL,
-  `usertypeid` int(11) NOT NULL,
-  `Dob` varchar(222) NOT NULL,
+  `usertypeid` int(11) NOT NULL DEFAULT 2,
+  `accessMode` int(11) NOT NULL DEFAULT 1,
+  `Dob` date NOT NULL,
   `email` varchar(222) DEFAULT NULL,
-  `password` varchar(222) DEFAULT NULL,
-  `phoneno` varchar(222) DEFAULT NULL
+  `password` varchar(222) NOT NULL,
+  `phoneno` varchar(222) DEFAULT NULL,
+  `addressid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `Name`, `usertypeid`, `Dob`, `email`, `password`, `phoneno`) VALUES
-(1, 'sadasdasdasd', 2, 'asdasdasd', 'dasdasd', 'dasdasd', 'asdasdasd');
+INSERT INTO `user` (`id`, `Name`, `usertypeid`, `accessMode`, `Dob`, `email`, `password`, `phoneno`, `addressid`) VALUES
+(1, 'omar', 1, 1, '1997-05-31', 'omar@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '01157979606', 6),
+(2, 'Mo', 2, 1, '2000-05-31', 'mo@gmail.com', 'ac1ab23d6288711be64a25bf13432baf1e60b2bd', '012825347698', 5);
 
 -- --------------------------------------------------------
 
@@ -418,6 +470,7 @@ ALTER TABLE `addresses`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id` (`id`,`pid`),
   ADD KEY `pid` (`pid`);
+  ADD KEY `id_2` (`id`);
 
 --
 -- Indexes for table `admins`
@@ -537,6 +590,12 @@ ALTER TABLE `requirelookup`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sql_inject`
+--
+ALTER TABLE `sql_inject`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `systemstate`
 --
 ALTER TABLE `systemstate`
@@ -550,6 +609,7 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `id_2` (`id`),
   ADD KEY `id` (`id`,`usertypeid`),
   ADD KEY `usertypeid` (`usertypeid`);
+  ADD KEY `addressid` (`addressid`);
 
 --
 -- Indexes for table `usertype`
@@ -573,7 +633,7 @@ ALTER TABLE `volunteers`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -678,6 +738,12 @@ ALTER TABLE `requirelookup`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `sql_inject`
+--
+ALTER TABLE `sql_inject`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `systemstate`
 --
 ALTER TABLE `systemstate`
@@ -740,7 +806,7 @@ ALTER TABLE `donationoptionsvalue`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_3` FOREIGN KEY (`usertypeid`) REFERENCES `usertype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+  ADD CONSTRAINT `user_ibfk_4` FOREIGN KEY (`addressid`) REFERENCES `addresses` (`id`);
 --
 -- Constraints for table `volunteers`
 --
