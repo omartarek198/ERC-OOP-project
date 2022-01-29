@@ -1,5 +1,5 @@
 <?php
-include_once 'Database.php';
+include_once '../Database.php';
 $db = new Database();
 $link = $db->connectToDB();
 $pid = $_POST['lid'];

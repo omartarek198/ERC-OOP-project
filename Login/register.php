@@ -30,7 +30,7 @@
                 <option value="nothing">Select a Continent</option>
                 <option value="add another">add another</option>
         <?php
-            include_once 'Database.php';
+            include_once '../Database.php';
             $db = new Database();
             $link = $db->connectToDB();
             $sql = "SELECT * FROM addresses where pid is null";
