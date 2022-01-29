@@ -34,7 +34,7 @@ if ($_POST)
         echo '<script>location.href="../register.html";</script>';
     }else if (!$creator->IsUNtaken($username)){
 
-        $user = new User($_POST["registerName"], $_POST["registerDate"], $_POST["registerEmail"], $_POST["registerUsername"], $_POST["registerPassword"], $_POST["registerPhoneNo"]);
+        $user = new User($_POST["registerName"], $_POST["registerDate"], $_POST["registerEmail"], $_POST["registerUsername"], $_POST["registerPassword"], $_POST["registerPhoneNo"], $_POST["registerDist"]);
 
         $user->register();
      //   echo '<script>location.href="../choose.html";</script>';
