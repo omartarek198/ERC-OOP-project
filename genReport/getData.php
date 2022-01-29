@@ -6,9 +6,12 @@ class getData
     private $result;
     private $all_property;
     private $rows;
-    public function __construct(){
-        $this->tbRead = new readTable();
+    public function __construct($t){
+        $this->tbRead = new readTable($t);
         $this->result = $this->tbRead->dispTable();
+    }
+    public function setRe($tname){
+        $this->tbRead->setRe($tname);
     }
     public function getCNames(){
     $this->all_property = array();

@@ -4,43 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            function func(file, an){
+                    $.ajax({
+                        // alert("in aj");
+                        url: 'downloadAj.php',
+                        type:'POST',
+                        data:{
+                            type : file, ff: an
+                        },
+                        success: (response)=> {
+                           window.location= 'downloadAj.php';
+    
+                        }
+                        });
+                
+            }
+        </script> -->
     <title>Report</title>
 </head>
 <body>
-<?php
-    include_once 'getData.php';
-    include_once 'arrayToXlsxAdapter.php';
-    include_once 'xlsxDownload.php';
-    include_once 'csvDownload.php';
-    include_once 'arrayToCsvAdapter.php';
-    $gtD = new getData();
-    $pros = $gtD->getCNames();
-    $rows = $gtD->getRows();
-    $atx = new arrayToXlsx();
-    $atc = new arrayToCsv();
-    $wrt = $atc->convertData($pros, $rows);
-    $sheet = $atx->convertData($pros, $rows);
-    $csvF = new csvD($wrt);
-    $csvF->downloadCSV();
-    $xlsxF = new xlsxD($sheet);
-    $xlsxF->downloadXLSX();
-echo '<table class="data-table">
-        <tr class="data-heading">';
-foreach ($pros as $item){
-    echo '<td>' . $item . '</td>';
-}
-echo '</tr>';
 
-foreach($rows as $row){
-    echo "<tr>";
-    foreach ($pros as $item) {
-        echo '<td>' . $row[$item] . '</td>';
-    }
-    echo '</tr>';
-}
-echo "</table>";
-  
-    echo "<button onClick=<?php?>CLICK HERE I DARE YA</button>";
-?>
+<table id="datahere" class="data-table">
+    <?php
+    include_once 'showTable.php';
+    $t = $_POST['tNames'];
+    $sh = new showing($t);
+    ?>
+    </table>
+    <form action="downloadAj.php" method="POST">
+        <select name="act" id="act">
+    <option  value="csv,<?php echo $_POST['tNames'] ?>">csv</option>
+    <option  value="xlsx,<?php echo $_POST['tNames'] ?>">xlsx</option>
+    </select>
+    <a href="downloadAj.php"></a>
+    <button>Do Action</button>
+    </form>
+        <!-- <iframe src="downloadAj.php" frameborder="0" id="" style="display:none"></iframe> -->
 </body>
 </html>

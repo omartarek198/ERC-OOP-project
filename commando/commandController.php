@@ -6,18 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control</title>
 </head>
-<body>
-    <?php
-        include_once 'invokerClass.php';
-        include_once 'adminPermissions.php';
-        include_once 'revokeAccess.php';
-        include_once 'grantAccess.php';
-        include_once 'masterAdmin.php';
-        $id = $_POST['uNames'];
-        $ap = new masterAdmin($id); 
-        $acc = new grantAccess($ap);
-        $acc->execute();
 
-    ?>
+<body>
+
+    <form action="doAction.php" method="POST">
+        <select name="act" id="act">
+    <option  value="grantAccess,<?php echo $_POST['uNames'] ?>">grantAccess</option>
+    <option  value="revokeAccess,<?php echo $_POST['uNames'] ?>">revokeAccess</option>
+    </select>
+    <a href="doAction.php"></a>
+    <button>Do Action</button>
+    </form>
 </body>
 </html>
