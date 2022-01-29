@@ -7,7 +7,7 @@ $validate = new ValidationClass();
 $name = $phoneno  = $address  = $desc = $Fn  = "";
 $name_err = $phoneno_err  = $address_err  = $desc_err = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = 
+    $name =
     public function ValidationClass()
     {
         if (!)
