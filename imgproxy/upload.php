@@ -1,6 +1,7 @@
 <?php
 
-// Include the database configuration file  
+// Include the database configuration file
+$db ="";
 require_once'Database1.php';
 
 // If file upload form is submitted 
@@ -19,6 +20,7 @@ if (isset($_POST["submit"])) {
             $imgContent = addslashes(file_get_contents($image));
 
             // Insert image content into database 
+
             $insert = $db->query("INSERT into images (image, created) VALUES ('$imgContent', NOW())");
 
             if ($insert) {

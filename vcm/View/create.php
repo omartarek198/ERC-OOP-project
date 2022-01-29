@@ -28,21 +28,22 @@
                         </div>
                         <p>Please fill this form and submit to add Volunteer record to the database.</p>
                         <form action="../Controller/CreateController.php" method="post">
-                            <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
-                                <label>Name</label>
-                                <input type="text" name="name" class="form-control" value="">
-                                <span class="help-block"></span>
-                            </div>
-                            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-                                <label>Email</label>
-                                <input type="text" name="email" class="form-control" value="">
-                                <span class="help-block"></span>
-                            </div>
-                            <div class="form-group <?php echo (!empty($phonenumber_err)) ? 'has-error' : ''; ?>">
-                                <label>Phone Number</label>
-                                <input type="text" name="phonenumber" class="form-control" value="">
-                                <span class="help-block"></span>
-                            </div>
+
+                            <label >Name</label>
+                            <input type="text" name="registerName" id="registerName" required>
+                            <label>Date Of Birth</label>
+                            <input type="date" name="registerDate" id="registerDate" required>
+                            <label >Email</label>
+                            <input type="text" name="registerEmail" id="registerEmail" required>
+                            <label >Username</label>
+                            <input type="text" name="registerUsername" id="registerUsername" required>
+                            <label >Password</label>
+                            <input type="password" name="registerPassword" id="registerPassword" required>
+                            <label >Confirm Password</label>
+                            <input type="password" name="registerConfirmPassword" id="registerConfrimPassword" required>
+                            <label >Phone Number</label>
+                            <input type="text" name="registerPhoneNo" id="registerPhoneNo" required>
+
                             <div class="form-group <?php echo (!empty($hours_err)) ? 'has-error' : ''; ?>">
                                 <label>Hours</label>
                                 <input type="text" name="hours" class="form-control" value="">
