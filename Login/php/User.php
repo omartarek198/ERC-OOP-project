@@ -11,11 +11,12 @@ class User
     private $username;
     private $password;
     private $phone;
+    private $address;
     public $database;
     public $sql;
     public $link;
 
-    public function __construct($name, $dob, $email, $username, $password, $pno)
+    public function __construct($name, $dob, $email, $username, $password, $pno, $addressid)
     {
         $this->name = $name;
         $this->usertypeid = 2;
@@ -24,6 +25,7 @@ class User
         $this->username = $username;
         $this->password = $password;
         $this->phone = $pno;
+        $this->address = $addressid;
     }
 
 
@@ -45,8 +47,8 @@ class User
 
     function register()
     {
-        $this->sql = "INSERT INTO user (Name, usertypeid, Dob, email, username, password, phoneno)"
-            . " VALUES ('" . $this->name . "' , '" . $this->usertypeid . "' , '" . $this->dob . "' , '" . $this->email . "' , '" . $this->username . "' , '" . sha1($this->password) . "' , '" . $this->phone . "')";
+        $this->sql = "INSERT INTO user (Name, usertypeid, Dob, email, username, password, phoneno, addressid)"
+            . " VALUES ('" . $this->name . "' , '" . $this->usertypeid . "' , '" . $this->dob . "' , '" . $this->email . "' , '" . $this->username . "' , '" . sha1($this->password) . "' , '" . $this->phone . "' , '" . $this->address . "')";
 
 
         $this->connectToDatabase();

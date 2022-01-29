@@ -8,14 +8,15 @@
 </head>
 <body>
     <?php
-        include_once 'invokeClass.php';
+        include_once 'invokerClass.php';
         include_once 'adminPermissions.php';
+        include_once 'revokeAccess.php';
         include_once 'grantAccess.php';
         include_once 'masterAdmin.php';
         $id = $_POST['uNames'];
         $ap = new masterAdmin($id); 
         $acc = new grantAccess($ap);
-        $acc->grantAccess();
+        $acc->execute();
 
     ?>
 </body>

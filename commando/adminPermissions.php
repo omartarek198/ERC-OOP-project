@@ -1,7 +1,6 @@
 <?php
 
-class adminPermissions{
-
+interface adminPermissions{
     public function grantAccess();
     public function revokeAccess();
 }

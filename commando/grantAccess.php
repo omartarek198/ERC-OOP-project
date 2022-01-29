@@ -1,5 +1,5 @@
 <?php
-include_once 'adminPermissions.php';
+include_once 'commandInterface.php';
 class grantAccess implements command{
     private adminPermissions $mAdmin;
     public function __construct($ma){
